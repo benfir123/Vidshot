@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using VisioForge.Types.OutputFormat;
 
 namespace Vidshot
 {
@@ -11,8 +16,7 @@ namespace Vidshot
         {
 
             InitializeComponent();
-            this.Opacity = .7D;
-            Console.WriteLine(window.X);
+            this.Opacity = .5D;
 
         }
 
@@ -94,7 +98,7 @@ namespace Vidshot
 
                 ControlPaint.DrawReversibleFrame(window, Color.FromArgb(80, 120, 120, 120), FrameStyle.Dashed);
 
-                ToolStrip.Location = new Point(window.X + window.Width - 111, window.Y + window.Height);
+                //ToolStrip.Location = new Point(window.X + window.Width - 111, window.Y + window.Height);
 
 
 
@@ -116,7 +120,7 @@ namespace Vidshot
 
         private void Form2_MouseUp(object sender, MouseEventArgs e)
         {
-            ToolStrip.Visible = true;
+            //ToolStrip.Visible = true;
         }
 
         private void ToolStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -131,29 +135,11 @@ namespace Vidshot
                     this.Close();
                     MessageBox.Show("Clicked");
 
-                    videoCapture1.Screen_Capture_Source = new VisioForge.Types.Sources.ScreenCaptureSourceSettings { FullScreen = true };
-                    videoCapture1.Audio_PlayAudio = videoCapture1.Audio_RecordAudio = false;
-                    videoCapture1.Output_Filename = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos) + "\\output.mp4";
-                    videoCapture1.Output_Format = new VFMP4v8v10Output();
-                    videoCapture1.Mode = VisioForge.Types.VFVideoCaptureMode.ScreenCapture;
-
-                    videoCapture1.Start();
-
-
                     break;
 
                 case "SaveBtn":
 
-                    videoCapture1.Stop();
 
-                    SaveFileDialog sfd = new();
-                    sfd.CheckPathExists = true;
-                    sfd.FileName = "Capture";
-                    sfd.Filter = "PNG Image(*.png)|*.png|JPG Image(*.jpg)|*.jpg|BMP Image(*.bmp)|*.bmp";
-                    if (sfd.ShowDialog() == DialogResult.OK)
-                    {
-                        //pdCapture.Image.Save(sfd.FileName);
-                    }
 
                     break;
             }

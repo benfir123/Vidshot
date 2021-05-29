@@ -27,7 +27,6 @@ namespace Vidshot
         }
 
         private const int WM_NCHITTEST = 0x84;
-        private const int HT_CLIENT = 0x1;
         private const int HT_CAPTION = 0x2;
 
     }
