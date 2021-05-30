@@ -69,7 +69,7 @@ namespace Vidshot
                 this.DoubleBuffered = true;
                 this.BackColor = Color.White;
                 this.TransparencyKey = Color.White;
-                //ToolStrip.Visible = false;
+                ToolStrip.Visible = false;
 
                 window = new(
                     Math.Min(mouseDownPoint.X, mousePoint.X),
@@ -98,9 +98,11 @@ namespace Vidshot
 
                 ControlPaint.DrawReversibleFrame(window, Color.FromArgb(80, 120, 120, 120), FrameStyle.Dashed);
 
-                //ToolStrip.Location = new Point(window.X + window.Width - 111, window.Y + window.Height);
 
+               
+                ToolStrip.Location = new Point(window.X + window.Width - 125 ,window.Y + window.Height);
 
+      
 
 
 
@@ -120,7 +122,9 @@ namespace Vidshot
 
         private void Form2_MouseUp(object sender, MouseEventArgs e)
         {
-            //ToolStrip.Visible = true;
+
+            ToolStrip.Visible = true;
+
         }
 
         private void ToolStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -132,8 +136,9 @@ namespace Vidshot
             {
                 case "toolStripButton1":
 
-                    this.Close();
+                    
                     MessageBox.Show("Clicked");
+                    this.Close();
 
                     break;
 
@@ -145,5 +150,6 @@ namespace Vidshot
             }
 
         }
+
     }
 }
