@@ -54,6 +54,7 @@ namespace Vidshot
             this.ToolStrip.Size = new System.Drawing.Size(122, 25);
             this.ToolStrip.TabIndex = 0;
             this.ToolStrip.Text = "ToolStrip";
+            this.ToolStrip.Visible = false;
             this.ToolStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ToolStrip_ItemClicked);
             // 
             // toolStripButton1
@@ -96,6 +97,8 @@ namespace Vidshot
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton2.Text = "toolStripButton2";
+            // 
+
             // 
             // Form2
             // 

@@ -12,6 +12,7 @@ namespace Vidshot
 {
     public partial class Form2 : Form
     {
+
         public Form2()
         {
 
@@ -19,7 +20,7 @@ namespace Vidshot
             this.Opacity = .5D;
 
         }
-
+        
         bool mouseDown = false;
         bool PointExists = false;
         Point mouseDownPoint = Point.Empty;
@@ -136,15 +137,13 @@ namespace Vidshot
             {
                 case "toolStripButton1":
 
-                    
-                    MessageBox.Show("Clicked");
-                    this.Close();
+
 
                     break;
 
-                case "SaveBtn":
+                case "toolStripButton2":
 
-
+  
 
                     break;
             }
