@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VisioForge.Types.OutputFormat;
+using VisioForge.Controls.VideoCapture;
+using VisioForge.Controls.UI.WinForms;
+
 
 namespace Vidshot
 {
@@ -26,7 +33,10 @@ namespace Vidshot
         Point mouseDownPoint = Point.Empty;
         Point mousePoint = Point.Empty;
         Rectangle window;
-
+        VideoCaptureCore VideoCapture1 = new();
+       
+ 
+       
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
@@ -138,12 +148,27 @@ namespace Vidshot
                 case "toolStripButton1":
 
 
+          
+
+                    VideoCapture1.Screen_Capture_Source = new VisioForge.Types.Sources.ScreenCaptureSourceSettings() { FullScreen = true, Top = window.Top, Bottom = window.Bottom, Right = window.Right, Left = window.Left };
+                    VideoCapture1.Audio_PlayAudio = VideoCapture1.Audio_RecordAudio = false;
+                    VideoCapture1.Output_Format = new VFMP4v11Output();
+                    VideoCapture1.Output_Filename = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos) + "\\output.mp4";
+                    VideoCapture1.Mode = VisioForge.Types.VFVideoCaptureMode.ScreenCapture;
+
+                    VideoCapture1.Start();
+
+
 
                     break;
 
                 case "toolStripButton2":
 
-  
+
+
+                    VideoCapture1.Stop();
+
+
 
                     break;
             }
