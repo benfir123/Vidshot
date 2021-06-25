@@ -25,7 +25,6 @@ namespace Vidshot
 
             InitializeComponent();
             this.Opacity = .5D;
-
         }
         
         bool mouseDown = false;
@@ -34,10 +33,16 @@ namespace Vidshot
         Point mousePoint = Point.Empty;
         Rectangle window;
         VideoCaptureCore VideoCapture1 = new();
-       
- 
-       
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            ToolStrip.Visible = true;
+        }
 
+        private void Form2_Click(object sender, EventArgs e)
+        {
+            ToolStrip.Visible = true;
+
+        }
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
@@ -62,19 +67,12 @@ namespace Vidshot
                 mousePoint = e.Location;
                 Invalidate();
             }
-
-
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
             Region r = new();
-
-
-
-
-
             if (mouseDown)
             {
                 this.DoubleBuffered = true;
@@ -108,72 +106,47 @@ namespace Vidshot
                 e.Graphics.FillRegion(Brushes.Black, r);
 
                 ControlPaint.DrawReversibleFrame(window, Color.FromArgb(80, 120, 120, 120), FrameStyle.Dashed);
-
-
-               
-                ToolStrip.Location = new Point(window.X + window.Width - 125 ,window.Y + window.Height);
-
-      
-
-
-
-
-
-
-
-
-
-
+                ToolStrip.Location = new Point(window.X + window.Width - 125, window.Y + window.Height);
             }
-
-
-
-
         }
 
         private void Form2_MouseUp(object sender, MouseEventArgs e)
         {
-
             ToolStrip.Visible = true;
-
+            mousePoint = e.Location;
         }
 
         private void ToolStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-
             string itemName = e.ClickedItem.Name;
-
-            switch (itemName)
+            bool chkFullScreen = window.Top == 0 ? true : false;
+            if (chkFullScreen)
             {
-                case "toolStripButton1":
+                this.WindowState = FormWindowState.Minimized;
+            }
+            switch (itemName)
+            {    
+                case "btnRecord":
+                    VideoCapture1.Screen_Capture_Source = new VisioForge.Types.Sources.ScreenCaptureSourceSettings()
+                    {
 
-
-          
-
-                    VideoCapture1.Screen_Capture_Source = new VisioForge.Types.Sources.ScreenCaptureSourceSettings() { FullScreen = true, Top = window.Top, Bottom = window.Bottom, Right = window.Right, Left = window.Left };
+                        FullScreen = chkFullScreen,
+                        Top = window.Top,
+                        Bottom = window.Bottom,
+                        Right = window.Right,
+                        Left = window.Left,
+                    };
                     VideoCapture1.Audio_PlayAudio = VideoCapture1.Audio_RecordAudio = false;
                     VideoCapture1.Output_Format = new VFMP4v11Output();
                     VideoCapture1.Output_Filename = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos) + "\\output.mp4";
                     VideoCapture1.Mode = VisioForge.Types.VFVideoCaptureMode.ScreenCapture;
-
                     VideoCapture1.Start();
-
-
-
                     break;
-
-                case "toolStripButton2":
-
-
-
+                case "btnStop":
                     VideoCapture1.Stop();
-
-
-
+                    this.Close();
                     break;
             }
-
         }
-
     }
 }
